@@ -5,6 +5,7 @@ use winapi::shared::inaddr::IN_ADDR;
 use winapi::shared::ws2ipdef::IP_HDRINCL;
 use std::ptr::null_mut;
 use std::mem;
+use std::net::Ipv4Addr;
 
 fn makeword(low: u8, high: u8) -> u16 {
     ((high as u16) << 8) | (low as u16)
@@ -18,11 +19,15 @@ pub fn initialize_socket() -> SOCKET {
             panic!("Failed to initialize Winsock. Error: {}", wsa_startup);
         }
 
+        println!("Winsock initialized successfully.");
+
         let socket = WSASocketW(AF_INET as i32, SOCK_RAW, 0, null_mut(), 0, 0);
         if socket == INVALID_SOCKET {
             let error_code = WSAGetLastError();
             panic!("Failed to create raw socket. Error code: {}", error_code);
         }
+
+        println!("Raw socket created successfully. Socket descriptor: {}", socket);
 
         let mut address = SOCKADDR_IN {
             sin_family: AF_INET as u16,
@@ -39,14 +44,18 @@ pub fn initialize_socket() -> SOCKET {
             panic!("Failed to bind socket. Error code: {}", error_code);
         }
 
-        println!("Setting socket options...");
+        let ipv4_addr = Ipv4Addr::from(u32::from_be(*(address.sin_addr.S_un.S_addr_mut())));
+        println!("Socket bound successfully to address: {}", ipv4_addr);
+
+        // Set the socket to promiscuous mode
         let opt_val: i32 = 1;
         if setsockopt(socket, IPPROTO_IP as i32, IP_HDRINCL as i32, &opt_val as *const _ as *const i8, std::mem::size_of::<i32>() as i32) == SOCKET_ERROR {
-            eprintln!("Failed to set socket options with error: {}", WSAGetLastError());
+            let error_code = WSAGetLastError();
+            eprintln!("Failed to set socket options. Error code: {}", error_code);
             WSACleanup();
             panic!("Failed to set socket options");
         }
-        println!("Socket options set successfully.");
+        println!("Socket set to promiscuous mode successfully.");
 
         socket
     }
@@ -54,6 +63,8 @@ pub fn initialize_socket() -> SOCKET {
 
 pub fn cleanup_socket() {
     unsafe {
+        println!("Cleaning up Winsock...");
         WSACleanup();
+        println!("Winsock cleanup completed.");
     }
 }

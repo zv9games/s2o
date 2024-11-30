@@ -16,8 +16,10 @@ where
         return;
     }
 
+    println!("Winsock initialized for packet capture.");
+
     let mut buffer = [0u8; 65535];
-    let short_timeout = Duration::from_millis(100);
+    let extended_timeout = Duration::from_secs(1);  // Increased timeout to 1 second for better packet capture
 
     println!("Starting packet capture...");
 
@@ -28,15 +30,15 @@ where
             let error_code = unsafe { WSAGetLastError() };
             if error_code == WSAETIMEDOUT {
                 println!("No packet received, timed out.");
-                std::thread::sleep(short_timeout);
+                std::thread::sleep(extended_timeout);
                 continue;
             } else {
                 eprintln!("Error: Failed to capture packet. Error code: {}", error_code);
                 break;
             }
-        }
-
-        if packet_size > 0 {
+        } else if packet_size == 0 {
+            println!("Received packet size is zero.");
+        } else {
             println!("Captured packet of size: {}", packet_size);
             println!("Packet data: {:?}", &buffer[..packet_size as usize]);
 

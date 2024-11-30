@@ -1,24 +1,44 @@
-## Changelog
+Changelog
+v0.1.0
+Initial Release
+Project Setup: Initialized the s2o_net_lib Rust project.
 
-### v0.1.0
+Library Files:
 
-#### Initial Release
-- **Project Setup**: Initialized the `s2o_net_lib` Rust project.
+Cargo.toml: Defined project dependencies and metadata.
 
-- **Library Files**:
-  - `lib.rs`: Entry point for the library module.
-  - `socket.rs`: Functions for socket initialization and cleanup.
-  - `capture.rs`: Packet capture functionality.
-  - `parse.rs`: Placeholder for packet parsing logic.
-  - `handlers.rs`: Placeholder for packet handling and processing.
+main.rs: Entry point for running the library as an application.
 
-- **Socket Initialization**:
-  - Implemented raw socket creation using Windows API.
-  - Configured socket binding to network interfaces.
-  - Ensured proper error handling and logging for socket operations.
+lib.rs: Main entry point for the library, facilitating module management.
 
-- **Packet Capture**:
-  - Implemented packet capture functionality that outputs captured packets.
+socket.rs: Functions for socket initialization and cleanup.
 
-#### Known Issues:
-- Packet parsing and handling functionality not yet implemented.
+capture.rs: Packet capture functionality, including detailed logging.
+
+parse.rs: Placeholder for packet parsing logic.
+
+handlers.rs: Placeholder for packet handling and processing logic.
+
+tests.rs: Unit tests for validating library functionality.
+
+network_interfaces.rs: Functionality for handling network interfaces.
+
+Socket Initialization:
+
+Implemented raw socket creation using the Windows API.
+
+Configured socket binding to network interfaces.
+
+Ensured proper error handling and detailed logging for socket operations.
+
+Packet Capture:
+
+Implemented packet capture functionality with detailed debug outputs.
+
+Configured a loop to check for incoming packets and process them.
+
+Known Issues:
+
+Packet parsing and handling functionality is currently in a placeholder state and needs implementation.
+
+Packet capture is not functional. 
