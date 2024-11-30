@@ -1,0 +1,8 @@
+[package]
+name = "s2o_net_lib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+winapi = { version = "0.3", features = ["winsock2", "ws2def", "ws2tcpip", "ws2ipdef", "iphlpapi", "ifdef"] }
+tokio = { version = "1.5", features = ["full"] }

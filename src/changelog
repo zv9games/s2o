@@ -1,0 +1,24 @@
+## Changelog
+
+### v0.1.0
+
+#### Initial Release
+- **Project Setup**: Initialized the `s2o_net_lib` Rust project.
+
+- **Library Files**:
+  - `lib.rs`: Entry point for the library module.
+  - `socket.rs`: Functions for socket initialization and cleanup.
+  - `capture.rs`: Packet capture functionality.
+  - `parse.rs`: Placeholder for packet parsing logic.
+  - `handlers.rs`: Placeholder for packet handling and processing.
+
+- **Socket Initialization**:
+  - Implemented raw socket creation using Windows API.
+  - Configured socket binding to network interfaces.
+  - Ensured proper error handling and logging for socket operations.
+
+- **Packet Capture**:
+  - Implemented packet capture functionality that outputs captured packets.
+
+#### Known Issues:
+- Packet parsing and handling functionality not yet implemented.
