@@ -1,0 +1,1 @@
+C:\S2O\s2o_net_lib\target\debug\s2o_net_lib.exe: C:\S2O\s2o_net_lib\src\block_all.rs C:\S2O\s2o_net_lib\src\data_speeds.rs C:\S2O\s2o_net_lib\src\lib.rs C:\S2O\s2o_net_lib\src\main.rs C:\S2O\s2o_net_lib\src\menu.rs C:\S2O\s2o_net_lib\src\packet_scan.rs C:\S2O\s2o_net_lib\src\permissions.rs
